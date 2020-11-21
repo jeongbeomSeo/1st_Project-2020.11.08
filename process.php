@@ -5,7 +5,7 @@ $username ='user_jb';
 $password ='as46933036';
 $database ='opentutorials';
 $conn = mysqli_connect($server, $username, $password, $database);
-$result_user = mysqli_query("SELECT * FROM member");
+$result_user = mysqli_query($conn,"SELECT * FROM member");
 
 switch($_GET['mode']){
     case 'signup' :
@@ -24,29 +24,57 @@ switch($_GET['mode']){
     case 'input' :
         $title=$_POST['title'];
         $description=$_POST['description'];
-        $member_id=$_SESSION['id'];
-        $input_Info="INSERT INTO topic (title,description,member_id) VALUES('$title','$description',$member_id)";
+        $member_id=$_SESSION['userID'];
+        $input_Info="INSERT INTO topic (title,description,member_id) VALUES('$title','$description','$member_id')";
         $topic_input=mysqli_query($conn,$input_Info);
         header("Location: ./list.php");
     break;
 
     case 'delete' :
-        if($_SESSION['id']===$_POST['member_id']){
+        if($_SESSION['userID']==$_POST['delete_user_ID']){
             $topicID=$_POST['id'];
-            $delete_Info="DELETE FROM topic WHERE id=$topicID";
+            $delete_Info="DELETE FROM topic WHERE id={$topicID}";
             mysqli_query($conn,$delete_Info);
             header("Location: ./list.php");
         } else{
-            header("Location: ./error.php?error=notAutority");
+            header("Location: ./error.php?error=notAuthority");
         }
+    break;
     case 'modify' :
-        if($_SESSION['id']===$_POST['member_id']){
         $title=$_POST['title'];
         $description=$_POST['description'];
-        $member_id=$_SESSION['id'];
-        $input_Info="INSERT INTO topic (title,description,member_id) VALUES('$title','$description',$member_id)";
+        $input_Info="UPDATE topic SET title='$title', description='$description'";
+        mysqli_query($coon,$input_Info);
+        header("Location: ./list.php");
+    break;
+
+    case 'comment_input' :
+        $title=$_POST['title'];
+        $description=$_POST['description'];
+        $member_id=$_SESSION['userID'];
+        $topic_id=$_POST['topic_id'];
+        $input_info="INSERT INTO comment (title, description, member_id, topic_id) VALUES('$title','$description','$member_id',$topic_id)";
+        mysqli_query($conn,$input_info);
+        header("Location: ./list.php");
+    break;
+
+    case 'comment_modify' :
+        $title=$_POST['title'];
+        $description=$_POST['description'];
+        $input_Info="UPDATE comment SET title='$title', description='$description'";
+        mysqli_query($coon,$input_Info);
+        header("Location: ./list.php");
+    break;
+
+    case 'comment_delete' :
+        if($_SESSION['userID']==$_POST['comment_id']){
+            $commentID=$_POST['comment_id'];
+            $delete_Info="DELETE FROM comment WHERE comment_id={$commentID}";
+            mysqli_query($conn,$delete_Info);
+            header("Location: ./list.php");
+        } else{
+            header("Location: ./error.php?error=notAuthority");
         }
-
-}
-
+    break;
+    }
 ?>

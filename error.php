@@ -17,17 +17,11 @@ session_start();
                     break;
 
                     case 'notAuthority' :?>
-                        <p>권한이 없습니다."</p>
-                        <a href="list.php">돌아가기</a><?php
-                    break;
-
-                    case 'notAutority' :?>
                         해당 게시물에 권한이 없습니다.<br>
                         돌아가세요.<br>
                         <a href="list.php">돌아가기</a><?php
                     break;
-                    ?>
-                        <?php
+
                 }
             ?>
 

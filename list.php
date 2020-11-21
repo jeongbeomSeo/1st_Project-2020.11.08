@@ -6,6 +6,7 @@ $database ='opentutorials';
 $conn = mysqli_connect($server, $username, $password, $database);
 $result_user = mysqli_query($conn,"SELECT * FROM member");
 $topic_list=mysqli_query($conn,"SELECT * FROM topic");
+$comment_list=mysqli_query($conn,"SELECT * FROM comment");
 session_start();
 
 if(!isset($_SESSION['isLogged'])) {
@@ -19,6 +20,11 @@ $select_topic="SELECT * FROM topic WHERE id={$_GET['id']}";
 $topic_result=mysqli_query($conn,$select_topic);
 $topic =mysqli_fetch_array($topic_result);
 }
+if(!empty($_GET['comment_id'])){
+$select_comment="SELECT * FROM comment WHERE comment_id={$_GET['comment_id']}";
+$comment_result=mysqli_query($conn,$select_comment);
+$comment=mysqli_fetch_array($comment_result);
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,13 +32,17 @@ $topic =mysqli_fetch_array($topic_result);
     <head>
         <meta charset="utf-8">
         <title>게시물</title>
-        <div>
+    </head>
+    <body>
+    <form action="logout.php">
+    <input type="submit" value="logOut">
+    <div>
             <nav>
                 <ul>
                     <?php
                         while($row=mysqli_fetch_array($topic_list)){
                             $mainTitle=$row['title'];
-                            $link = "list.php?id={$row['id']}";?>
+                            $link = "./list.php?id={$row['id']}";?>
                             <li><a href="<?=$link?>"><?=$mainTitle?></a></li>          <!--문장 문자열 분석 필요.-->
                             
                     <?php   
@@ -54,23 +64,56 @@ $topic =mysqli_fetch_array($topic_result);
                             <p><?=$topic['description']?><p>
                             </div>
                             <a href="./modify.php?id=<?=$topic['id']?>">수정하기</a>
-                            <form action="process.php?mode=delete" method="POST">
+                            <form action="./process.php?mode=delete" method="POST">
                                 <input type="hidden" name='id' value=<?=$topic['id']?>>
-                                <input type="hidden" name='membe    r_id' value=<?=$topic['member_id']?>>
+                                <input type="hidden" name='delete_user_ID' value=<?=$topic['member_id']?>>
                                 <button type="text">삭제하기</button><br><br>
                             </form>
+                            <ul>
+                            <?php
+                                ?><h3>댓글 목록</h3><br><?php
+                                while($comment_row=mysqli_fetch_array($comment_list)){
+                                    if($topic['id'] == $comment_row['topic_id']){
+                                        $commentTitle=$comment_row['title'];
+                                        $link="./list.php?id={$topic['id']}&comment_id={$comment_row['comment_id']}"; ?>
+                                        <li><a href=<?=$link?>><?=$comment_row['member_id']." : "."$commentTitle"?></a></li>
+                                        <?php
+                                }
+                            }
+                            ?>
+                            </ul>
+                            <ul>
+                                <form action="comment_input.php?id=<?=$topic['id']?>" method="POST">
+                                <button type="submit">댓글 달기</button>
+                                </form>
+                            </ul>
+                            
                             <?php
                         }
                     ?>
-                        <form action="logout.php">
-                            <input type="submit" value="logOut">
-                        </form>
+                    <?php
+                        if(!empty($comment)){?>
+                            <div class ='comment'>
+                                <div class ='comment_headline'> 
+                                <h3>댓글창</h3>
+                                </div>
+                            <div class ='commnet_description'>
+                                <?=$comment['description']?>
+                            </div>
+                            </div>
+                            <a href="./comment_modify.php?id=<?=$topic['id']?>&comment_id=<?=$comment['comment_id']?>">수정하기</a>
+                            <form action="./process.php?mode=comment_delete" method="POST">
+                                <input type="hidden" name='comment_id' value=<?=$comment['comment_id']?>>
+                                <input type="hidden" name='topic_id' value=<?=$topic['id']?>>
+                                <input type="hidden" name='delete_user_ID' value=<?=$comment['member_id']?>>
+                                <button type="text">삭제하기</button><br><br>
+                            </form>
+                        <?php
+                     }
+                     ?>
+                            </form>
                 </div>
             </article>
-            
         </div>
-    </head>
-    <body>
-        
     </body>
 </html>

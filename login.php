@@ -4,10 +4,9 @@ $username ='user_jb';
 $password ='as46933036';
 $database ='opentutorials';
 $conn = mysqli_connect($server, $username, $password, $database);
-$result_user = mysqli_query("SELECT * FROM member");
-
-
+$result_user = mysqli_query($conn,"SELECT * FROM member");
 ?>
+
 <!DOCTYPE html>
 <html>
     <head>
