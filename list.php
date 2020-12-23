@@ -67,7 +67,7 @@ $comment=mysqli_fetch_array($comment_result);
                             <form action="./process.php?mode=delete" method="POST">
                                 <input type="hidden" name='id' value=<?=$topic['id']?>>
                                 <input type="hidden" name='delete_user_ID' value=<?=$topic['member_id']?>>
-                                <button type="text">삭제하기</button><br><br>
+                                <button type="submit">삭제하기</button><br><br>
                             </form>
                             <ul>
                             <?php
@@ -104,10 +104,10 @@ $comment=mysqli_fetch_array($comment_result);
                             <a href="./comment_modify.php?id=<?=$topic['id']?>&comment_id=<?=$comment['comment_id']?>">수정하기</a>
                             <form action="./process.php?mode=comment_delete" method="POST">
                                 <input type="hidden" name='comment_id' value=<?=$comment['comment_id']?>>
-                                <input type="hidden" name='topic_id' value=<?=$topic['id']?>>
                                 <input type="hidden" name='delete_user_ID' value=<?=$comment['member_id']?>>
-                                <button type="text">삭제하기</button><br><br>
+                                <button type="submit">삭제하기</button><br><br>
                             </form>
+                            
                         <?php
                      }
                      ?>

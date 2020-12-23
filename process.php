@@ -15,7 +15,7 @@ switch($_GET['mode']){
         $member_info="INSERT INTO member (member_id,member_password,member_name) VALUES('$member_id','$member_password','$member_name')";
         $member_result=mysqli_query($conn,$member_info);
         if($member_result){
-            header("Location: login.php");
+            header("Location: index.html");
         }else {
             echo "failed to register";
         }
@@ -33,18 +33,19 @@ switch($_GET['mode']){
     case 'delete' :
         if($_SESSION['userID']==$_POST['delete_user_ID']){
             $topicID=$_POST['id'];
-            $delete_Info="DELETE FROM topic WHERE id={$topicID}";
+            $delete_Info="DELETE FROM topic WHERE id='$topicID'";
             mysqli_query($conn,$delete_Info);
-            header("Location: ./list.php");
+            header("Location:./list.php");
         } else{
-            header("Location: ./error.php?error=notAuthority");
+            header("Location:./error.php?error=notAuthority");
         }
     break;
     case 'modify' :
         $title=$_POST['title'];
         $description=$_POST['description'];
-        $input_Info="UPDATE topic SET title='$title', description='$description'";
-        mysqli_query($coon,$input_Info);
+        $topic_id=$_POST['topic_id'];
+        $input_Info="UPDATE topic SET title='$title', description='$description' WHERE id='$topic_id'";
+        mysqli_query($conn,$input_Info);
         header("Location: ./list.php");
     break;
 
@@ -61,13 +62,14 @@ switch($_GET['mode']){
     case 'comment_modify' :
         $title=$_POST['title'];
         $description=$_POST['description'];
-        $input_Info="UPDATE comment SET title='$title', description='$description'";
-        mysqli_query($coon,$input_Info);
+        $comment_id=$_POST['comment_id'];
+        $input_Info="UPDATE comment SET title='$title', description='$description' WHERE comment_id='$comment_id'";
+        mysqli_query($conn,$input_Info);
         header("Location: ./list.php");
     break;
 
     case 'comment_delete' :
-        if($_SESSION['userID']==$_POST['comment_id']){
+        if($_SESSION['userID']==$_POST['delete_user_ID']){
             $commentID=$_POST['comment_id'];
             $delete_Info="DELETE FROM comment WHERE comment_id={$commentID}";
             mysqli_query($conn,$delete_Info);

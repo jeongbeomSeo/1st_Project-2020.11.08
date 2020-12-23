@@ -7,10 +7,11 @@ $database ='opentutorials';
 $conn = mysqli_connect($server, $username, $password, $database);
 $id=$_GET['id'];
 $comment_id=$_GET['comment_id'];
-$topic_list=mysqli_query($conn,"SELECT * FROM topic WHERE id={$id}");
+$topic_list=mysqli_query($conn,"SELECT * FROM topic WHERE id='$id'");
 $topic=mysqli_fetch_array($topic_list);
-$comment_result=myslqi_query($conn,"SELECT * FROM comment WHERE comment_id={$comment_id}");
-$comment=mysqli_fetch_array($comment_result);?>
+$comment_result=mysqli_query($conn,"SELECT * FROM comment WHERE comment_id='$comment_id'");
+$comment=mysqli_fetch_array($comment_result);
+?>
 
 <!DOCTYPE html>
 <html>
@@ -28,6 +29,7 @@ $comment=mysqli_fetch_array($comment_result);?>
                 <form action="process.php?mode=comment_modify" method="POST">
                     <p>댓글 제목 :<input type="text" name='title' value=<?=$comment['title']?>></p>
                     <p>댓글 내용 :<textarea name='description' id='' value=<?=$comment['description']?> cols='30' rows='10'></textarea></p>
+                    <input type="hidden" name='comment_id' value=<?=$comment['comment_id']?>>
                     <button type="submit" >댓글 수정</button>
                 </form>
                 <?php 
