@@ -4,7 +4,6 @@ $username ='user_jb';
 $password ='as46933036';
 $database ='opentutorials';
 $conn = mysqli_connect($server, $username, $password, $database);
-$result_user = mysqli_query($conn,"SELECT * FROM member");
 
 /*
 while($row = mysqli_fetch_array($result_user)){       # 데이터 베이스에 회원 정보 담겨져 있는지 확인

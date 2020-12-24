@@ -11,7 +11,6 @@ session_start();
 
 if(!isset($_SESSION['isLogged'])) {
 echo "<script>alert('로그인이 필요한 서비스 입니다.');</script>";
-echo "<meta http-equiv='refresh' content='0;url=login.php'>";
 exit;
 }
 
@@ -36,6 +35,7 @@ $comment=mysqli_fetch_array($comment_result);
     <body>
     <form action="logout.php">
     <input type="submit" value="logOut">
+    </form>
     <div>
             <nav>
                 <ul>
@@ -111,7 +111,6 @@ $comment=mysqli_fetch_array($comment_result);
                         <?php
                      }
                      ?>
-                            </form>
                 </div>
             </article>
         </div>
