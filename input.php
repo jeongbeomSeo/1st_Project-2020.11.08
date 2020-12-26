@@ -1,6 +1,6 @@
 <?php
 include_once 'db.php';
-include 'api.php';
+include_once 'api.php';
 ?>
 
 <!DOCTYPE html>

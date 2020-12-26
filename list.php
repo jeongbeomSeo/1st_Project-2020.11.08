@@ -1,7 +1,6 @@
 <?php
 include_once 'db.php';
 include_once 'api.php';
-include_once 'logincheck.php';
 
 $result_user = mq("SELECT * FROM member");
 $topic_list=mq("SELECT * FROM topic");
@@ -18,7 +17,7 @@ $topic_result=mq($select_topic);
 $topic =mysqli_fetch_array($topic_result);
 }
 if(!empty($_GET['comment_id'])){
-$select_comment="SELECT * FROM comment WHERE comment_id={$_GET['comment_id']}";
+$select_comment="SELECT * FROM comment WHERE id={$_GET['comment_id']}";
 $comment_result=mq($select_comment);
 $comment=mysqli_fetch_array($comment_result);
 }
@@ -71,7 +70,7 @@ $comment=mysqli_fetch_array($comment_result);
                   while($comment_row=mysqli_fetch_array($comment_list)){
                     if($topic['id'] == $comment_row['topic_id']){
                       $commentTitle=$comment_row['title'];
-                      $link="./list.php?id={$topic['id']}&comment_id={$comment_row['comment_id']}"; ?>
+                      $link="./list.php?id={$topic['id']}&comment_id={$comment_row['id']}"; ?>
                       <li><a href=<?=$link?>><?=$comment_row['member_id']." : "."$commentTitle"?></a></li>
                       <?php
                     }
@@ -94,9 +93,9 @@ $comment=mysqli_fetch_array($comment_result);
                 <?=$comment['description']?>
               </div>
             </div>
-            <a href="./comment_modify.php?id=<?=$topic['id']?>&comment_id=<?=$comment['comment_id']?>">수정하기</a>
+            <a href="./comment_modify.php?id=<?=$topic['id']?>&comment_id=<?=$comment['id']?>">수정하기</a>
             <form action="./process.php?mode=comment_delete" method="POST">
-              <input type="hidden" name='comment_id' value=<?=$comment['comment_id']?>>
+              <input type="hidden" name='comment_id' value=<?=$comment['id']?>>
               <input type="hidden" name='delete_user_ID' value=<?=$comment['member_id']?>>
               <button type="submit">삭제하기</button><br /><br />
             </form>     

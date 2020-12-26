@@ -19,82 +19,50 @@ switch($_GET['mode']){
     break;
 
     case 'input' :
-      if(empty($_POST['title'])){
-        header("Location: ./error.php?error=NotBlank");
-      }
-      else{
         $title=$_POST['title'];
         $description=$_POST['description'];
-        $member_id=$_SESSION['userID'];
-        $input_Info="INSERT INTO topic (title,description,member_id) VALUES('$title','$description','$member_id')";
-        $topic_input=mysqli_query($conn,$input_Info);
-        echo $_POST['title'];
-        header("Location: ./list.php");
-        }
+        input($title, $description);
     break;
 
     case 'delete' :
-      if($_SESSION['userID']==$_POST['delete_user_ID']){
-        $topicID=$_POST['id'];
-        $delete_Info="DELETE FROM topic WHERE id='$topicID'";
-        mysqli_query($conn,$delete_Info);
-        header("Location:./list.php");
-      } else{
-        header("Location:./error.php?error=notAuthority");
-      }
+      $userID = $_POST['delete_user_ID'];
+      $board_ID = $_POST['id'];
+      $table = "topic";
+      delete($userID, $board_ID, $table); 
     break;
     case 'modify' :
-      if(empty($_POST['title'])){
-        header("Location: ./error.php?error=NotBlank");
-      }
-      else{
         $title=$_POST['title'];
         $description=$_POST['description'];
         $topic_id=$_POST['topic_id'];
-        $input_Info="UPDATE topic SET title='$title', description='$description' WHERE id='$topic_id'";
-        mysqli_query($conn,$input_Info);
-        header("Location: ./list.php");
-        }
+        $table = "topic";
+        modify($title, $description, $topic_id, $table);
     break;
 
     case 'comment_input' :
-      if(empty($_POST['title'])){
-        header("Location: ./error.php?error=NotBlank");
-      } else{
-        $title=$_POST['title'];
-        $description=$_POST['description'];
-        $member_id=$_SESSION['userID'];
-        $topic_id=$_POST['topic_id'];
-        $input_info="INSERT INTO comment (title, description, member_id, topic_id) VALUES('$title','$description','$member_id',$topic_id)";
-        mysqli_query($conn,$input_info);
-        header("Location: ./list.php");
-      }
-    break;
+      $title=$_POST['title'];
+      $description=$_POST['description'];
+      $topic_id=$_POST['topic_id'];
+      comment_input($title, $description, $topic_id);
+      break;
 
     case 'comment_modify' :
-      if(empty($_POST['title'])){
-        header("Location: ./error.php?error=NotBlank");
-      } else{
         $title=$_POST['title'];
         $description=$_POST['description'];
         $comment_id=$_POST['comment_id'];
-        $input_Info="UPDATE comment SET title='$title', description='$description' WHERE comment_id='$comment_id'";
-        mysqli_query($conn,$input_Info);
-        header("Location: ./list.php");
-        }
+        $table = "comment";
+        modify($title, $description, $comment_id, $table);
+
     break;
 
     case 'comment_delete' :
-      if($_SESSION['userID']==$_POST['delete_user_ID']){
-        $commentID=$_POST['comment_id'];
-        $delete_Info="DELETE FROM comment WHERE comment_id={$commentID}";
-        mysqli_query($conn,$delete_Info);
-        header("Location: ./list.php");
-      } else{
-        header("Location: ./error.php?error=notAuthority");
-      }
+      $userID = $_POST['delete_user_ID'];
+      $board_ID = $_POST['comment_id'];
+      $table = "comment";
+      delete($userID, $board_ID, $table);
     break;
+    
     case 'default' :
+      header("Location: ./index.html");
     break;
   }
 ?>

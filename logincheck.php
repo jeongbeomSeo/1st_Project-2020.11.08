@@ -4,8 +4,7 @@ include_once 'api.php';
 
 if( !isset ( $_SESSION['isLogged'] ) ){
   header("Location: ./error.php?error='relogin'");
-}
-else{
+} else{
   header("Location: ./list.php");
 }
 ?>
