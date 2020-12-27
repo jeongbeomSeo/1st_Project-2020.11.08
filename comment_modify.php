@@ -35,7 +35,7 @@ $comment=mysqli_fetch_array($comment_result);
       ?>
       <?php
       if($_SESSION['userID'] != $comment['member_id']){
-        header("Location:./error.php?error=notAuthority");
+        error('notAuthority');
       }
       ?>
     </article>

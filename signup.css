@@ -1,0 +1,22 @@
+#signup{
+  display: block;
+  border-bottom: 1px solid #00c73c;
+
+}
+#signup h1{
+  margin: 0 auto;
+  font-size: 80px;
+  color: #00c73c;
+  text-align:center;
+}
+
+#signup_input{
+  text-align: center;
+  margin-top: 100px;
+}
+.item_signup{
+  width: 300px;
+  height: 30px;
+  margin: 0 auto;
+  
+}

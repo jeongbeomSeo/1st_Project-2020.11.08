@@ -1,15 +1,11 @@
 <?php
 include_once 'db.php';
 include_once 'api.php';
+include_once 'logincheck.php';
 
 $result_user = mq("SELECT * FROM member");
 $topic_list=mq("SELECT * FROM topic");
 $comment_list=mq("SELECT * FROM comment");
-
-if(!isset($_SESSION['isLogged'])) {
-echo "<script>alert('로그인이 필요한 서비스 입니다.');</script>";
-exit;
-}
 
 if(!empty($_GET['id'])){
 $select_topic="SELECT * FROM topic WHERE id={$_GET['id']}";

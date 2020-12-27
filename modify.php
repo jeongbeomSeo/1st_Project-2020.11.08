@@ -30,7 +30,7 @@ $topic=mysqli_fetch_array($topic_list);
         <?php 
         }
         if($_SESSION['userID'] !=$topic['member_id']){
-          header("Location:./error.php?error=notAuthority");
+          error('notAuthority');
         }
       ?>
     </article>

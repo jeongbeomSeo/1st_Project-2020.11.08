@@ -14,7 +14,10 @@ switch($_GET['mode']){
     if($member_result){
       header("Location: index.html");
     }else {
-      echo "failed to register";
+      echo ("<script>
+      alert('failed to register');
+      history.back();
+      </script>");
     }
     break;
 
