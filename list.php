@@ -17,6 +17,11 @@ $select_comment="SELECT * FROM comment WHERE id={$_GET['comment_id']}";
 $comment_result=mq($select_comment);
 $comment=mysqli_fetch_array($comment_result);
 }
+if($_SESSION['isLogged'] == 1){
+$select_member="SELECT * FROM member WHERE member_id='{$_SESSION['userID']}'";
+$member_list=mq($select_member);
+$member=mysqli_fetch_array($member_list);
+}
 ?>
 
 <!DOCTYPE html>
@@ -24,26 +29,45 @@ $comment=mysqli_fetch_array($comment_result);
   <head>
     <meta charset="utf-8">
     <title>게시물</title>
+    <link rel="stylesheet" href="./list.css?" type="text/css">
   </head>
   <body>
-    <form action="logout.php">
-    <input type="submit" value="logOut">
-    </form>
-    <div>
+    <div id="main_list">
+      <form action="logout.php">
+      <input type="submit" value="logOut">
+      </form>
+      <div id="list">
+        <h1>
+        JBC
+        </h1>
+      </div>
+    </div>
+    <div id="topic_list">
+      <div class="item_topic">topic_subject1 |</div>
+      <div class="item_topic">topic_subject2 |</div>
+      <div class="item_topic">topic_subject3 |</div>
+      <div class="item_topic">topic_subject4</div>
+    </div>
+    <div id="item_All">
       <nav>
-        <ul>
-          <?php
-            while($row=mysqli_fetch_array($topic_list)){
+        <div id="item_name">
+          Name : <?php echo $member['member_name']  ?>
+        </div>
+        <div id="item_topic">
+          <ul>
+            <?php
+              while($row=mysqli_fetch_array($topic_list)){
               $mainTitle=$row['title'];
               $link = "./list.php?id={$row['id']}";?>
               <li><a href="<?=$link?>"><?=$mainTitle?></a></li>          <!--문장 문자열 분석 필요.-->                      
             <?php   
             } 
           ?>
-        </ul>
-        <ul>
-          <a href="input.php">추가</a>
-        </ul>
+          </ul>
+          <ul>
+            <a href="input.php">추가</a>
+          </ul>
+        </div>
       </nav>
       <article>
         <div>
