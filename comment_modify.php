@@ -2,12 +2,12 @@
 include_once 'db.php';
 include_once 'api.php';
 
-$id=$_GET['id'];
-$comment_id=$_GET['comment_id'];
-$topic_list=mq("SELECT * FROM topic WHERE id='$id'");
-$topic=mysqli_fetch_array($topic_list);
-$comment_result=mq("SELECT * FROM comment WHERE id='$comment_id'");
-$comment=mysqli_fetch_array($comment_result);
+$id = $_GET['id'];
+$comment_id = $_GET['comment_id'];
+$topic_list = mq("SELECT * FROM topic WHERE id='$id'");
+$topic = mysqli_fetch_array($topic_list);
+$comment_result = mq("SELECT * FROM comment WHERE id='$comment_id'");
+$comment = mysqli_fetch_array($comment_result);
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +22,7 @@ $comment=mysqli_fetch_array($comment_result);
     </div>
     <article>
       <?php
-      if($_SESSION['userID']==$comment['member_id']){?>
+      if ($_SESSION['userID'] == $comment['member_id']) {?>
         <form action="process.php?mode=comment_modify" method="POST">
           <p>댓글 제목 :<input type="text" name='title' value=<?=$comment['title']?>></p>
           <div class ="text_caution">Not blank</div>
@@ -34,7 +34,7 @@ $comment=mysqli_fetch_array($comment_result);
       }
       ?>
       <?php
-      if($_SESSION['userID'] != $comment['member_id']){
+      if ($_SESSION['userID'] != $comment['member_id']) {
         error('notAuthority');
       }
       ?>

@@ -4,14 +4,14 @@ include_once 'api.php';
 
 $result_user = mq("SELECT * FROM member");
 
-switch($_GET['mode']){
+switch ($_GET['mode']) {
   case 'signup' :
     $member_id =$_POST['member_id'];
     $member_password =$_POST['member_password'];
     $member_name =$_POST['member_name'];
     $member_info="INSERT INTO member (member_id,member_password,member_name) VALUES('$member_id','$member_password','$member_name')";
     $member_result=mysqli_query($conn,$member_info);
-    if($member_result){
+    if ($member_result) {
       header("Location: index.html");
     }else {
       echo ("<script>
@@ -22,8 +22,8 @@ switch($_GET['mode']){
     break;
 
     case 'input' :
-        $title=$_POST['title'];
-        $description=$_POST['description'];
+        $title = $_POST['title'];
+        $description = $_POST['description'];
         input($title, $description);
     break;
 
@@ -34,24 +34,24 @@ switch($_GET['mode']){
       delete($userID, $board_ID, $table); 
     break;
     case 'modify' :
-        $title=$_POST['title'];
-        $description=$_POST['description'];
-        $topic_id=$_POST['topic_id'];
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $topic_id = $_POST['topic_id'];
         $table = "topic";
         modify($title, $description, $topic_id, $table);
     break;
 
     case 'comment_input' :
-      $title=$_POST['title'];
-      $description=$_POST['description'];
-      $topic_id=$_POST['topic_id'];
+      $title = $_POST['title'];
+      $description = $_POST['description'];
+      $topic_id = $_POST['topic_id'];
       comment_input($title, $description, $topic_id);
       break;
 
     case 'comment_modify' :
-        $title=$_POST['title'];
-        $description=$_POST['description'];
-        $comment_id=$_POST['comment_id'];
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $comment_id = $_POST['comment_id'];
         $table = "comment";
         modify($title, $description, $comment_id, $table);
 

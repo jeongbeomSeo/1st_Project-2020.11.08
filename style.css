@@ -1,4 +1,4 @@
-#MainPage{
+.MainPage {
   display: block;
   margin: 0 auto;
   font-size: 80px;
@@ -7,28 +7,28 @@
   text-align:center;
   padding: 40px;
 }
-#MainMenu li{
-  padding: 5px 0px 5px 5px;
+.MainMenu li {
+  padding: 5px 0 5px 5px;
   margin-bottom: 5px;
   border-bottom: 1px solid #efefef;
   font-size: 20px;
 }
-#jeongbeom{
+.jeongbeom {
   font-size: 30px;
   font-weight: bold;
   background-color:  #00c73c;
   margin: 0 auto;
   display: block;
-  padding: 30px; 
+  padding: 30px;
   color:white;
   position: fixed; bottom: 0; width: 100%;
   text-align: center;
 }
-a{
+a {
   text-decoration: none;;
   font-weight: bold;
 }
-.login{
+.login {
   display: block;
   margin: 0 auto;
   font-size: 80px;
@@ -37,24 +37,23 @@ a{
   padding: 40px;
   border-bottom: 1px solid #00c73c;
 }
-div.login_input{
+.login_input {
   position: relative;
   text-align: center;
   margin-top: 50px;
 }
-div.item_id{
+.item_id {
   margin-bottom: 5px;
 }
-div.item_password{
-  margin: 5px 0px 5px;
+.item_password {
+  margin: 5px 0 5px;
 }
-button.input_login{
-  display: inline;
+.input_login {
   width: 70px;
 }
-div.item_login_button{
+.item_login_button {
   display:inline;
 }
-div.item_link_singup{
+.item_link_singup {
   display:inline;
 }

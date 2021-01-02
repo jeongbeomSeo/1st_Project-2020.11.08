@@ -2,9 +2,9 @@
 include_once 'db.php';
 include_once 'api.php';
 
-$id=$_GET['id'];
-$topic_list=mq("SELECT * FROM topic WHERE id='$id'");
-$topic=mysqli_fetch_array($topic_list);
+$id = $_GET['id'];
+$topic_list = mq("SELECT * FROM topic WHERE id='$id'");
+$topic = mysqli_fetch_array($topic_list);
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +19,7 @@ $topic=mysqli_fetch_array($topic_list);
     </div>
     <article>
       <?php
-        if($_SESSION['userID']==$topic['member_id']){?>
+        if ($_SESSION['userID'] == $topic['member_id']) {?>
           <form action="process.php?mode=modify" method="POST">
             <p>게시물 제목 :<input type="text" name='title' value=<?=$topic['title']?>></p>
             <div class ="text_caution">Not blank</div>
@@ -29,7 +29,7 @@ $topic=mysqli_fetch_array($topic_list);
           </form>
         <?php 
         }
-        if($_SESSION['userID'] !=$topic['member_id']){
+        if ($_SESSION['userID'] != $topic['member_id']) {
           error('notAuthority');
         }
       ?>

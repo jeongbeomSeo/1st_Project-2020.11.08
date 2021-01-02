@@ -4,23 +4,23 @@ include_once 'api.php';
 include_once 'logincheck.php';
 
 $result_user = mq("SELECT * FROM member");
-$topic_list=mq("SELECT * FROM topic");
-$comment_list=mq("SELECT * FROM comment");
+$topic_list = mq("SELECT * FROM topic");
+$comment_list = mq("SELECT * FROM comment");
 
-if(!empty($_GET['id'])){
-$select_topic="SELECT * FROM topic WHERE id={$_GET['id']}";
-$topic_result=mq($select_topic);
-$topic =mysqli_fetch_array($topic_result);
+if (!empty($_GET['id'])) {
+$select_topic ="SELECT * FROM topic WHERE id={$_GET['id']}";
+$topic_result = mq($select_topic);
+$topic = mysqli_fetch_array($topic_result);
 }
-if(!empty($_GET['comment_id'])){
-$select_comment="SELECT * FROM comment WHERE id={$_GET['comment_id']}";
-$comment_result=mq($select_comment);
-$comment=mysqli_fetch_array($comment_result);
+if (!empty($_GET['comment_id'])) {
+$select_comment ="SELECT * FROM comment WHERE id={$_GET['comment_id']}";
+$comment_result = mq($select_comment);
+$comment = mysqli_fetch_array($comment_result);
 }
-if($_SESSION['isLogged'] == 1){
-$select_member="SELECT * FROM member WHERE member_id='{$_SESSION['userID']}'";
-$member_list=mq($select_member);
-$member=mysqli_fetch_array($member_list);
+if ($_SESSION['isLogged'] == 1) {
+$select_member ="SELECT * FROM member WHERE member_id='{$_SESSION['userID']}'";
+$member_list = mq($select_member);
+$member = mysqli_fetch_array($member_list);
 }
 ?>
 
@@ -32,7 +32,7 @@ $member=mysqli_fetch_array($member_list);
     <link rel="stylesheet" href="./list.css?" type="text/css">
   </head>
   <body>
-    <div id="main_list">
+    <div class="main_list">
       <form action="logout.php">
       <input type="submit" value="logOut">
       </form>
@@ -42,22 +42,22 @@ $member=mysqli_fetch_array($member_list);
         </h1>
       </div>
     </div>
-    <div id="topic_list">
+    <div class="topic_list">
       <div class="item_topic">topic_subject1 |</div>
       <div class="item_topic">topic_subject2 |</div>
       <div class="item_topic">topic_subject3 |</div>
       <div class="item_topic">topic_subject4</div>
     </div>
-    <div id="item_All">
+    <div class="item_All">
       <nav>
-        <div id="item_name">
+        <div class="item_name">
           Name : <?php echo $member['member_name']  ?>
         </div>
-        <div id="item_topic">
+        <div class="item_topic">
           <ul>
             <?php
-              while($row=mysqli_fetch_array($topic_list)){
-              $mainTitle=$row['title'];
+              while ($row = mysqli_fetch_array($topic_list)) {
+              $mainTitle = $row['title'];
               $link = "./list.php?id={$row['id']}";?>
               <li><a href="<?=$link?>"><?=$mainTitle?></a></li>          <!--문장 문자열 분석 필요.-->                      
             <?php   
@@ -72,7 +72,7 @@ $member=mysqli_fetch_array($member_list);
       <article>
         <div>
         <?php
-          if(!empty($topic)){?>
+          if (!empty($topic)) {?>
             <div class='title'>
               <h2><?=$topic['title']?></h2>
             </div>
@@ -87,9 +87,9 @@ $member=mysqli_fetch_array($member_list);
             </form>
             <ul>
                 <h3>댓글 목록</h3><br /><?php
-                  while($comment_row=mysqli_fetch_array($comment_list)){
-                    if($topic['id'] == $comment_row['topic_id']){
-                      $commentTitle=$comment_row['title'];
+                  while ($comment_row = mysqli_fetch_array($comment_list)) {
+                    if ($topic['id'] == $comment_row['topic_id']) {
+                      $commentTitle = $comment_row['title'];
                       $link="./list.php?id={$topic['id']}&comment_id={$comment_row['id']}"; ?>
                       <li><a href=<?=$link?>><?=$comment_row['member_id']." : "."$commentTitle"?></a></li>
                       <?php
@@ -104,7 +104,7 @@ $member=mysqli_fetch_array($member_list);
             </ul>  
           <?php
           }
-          if(!empty($comment)){?>
+          if (!empty($comment)) {?>
             <div class ='comment'>
               <div class ='comment_headline'> 
                 <h3>댓글창</h3>
