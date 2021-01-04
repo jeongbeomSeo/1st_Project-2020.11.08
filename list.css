@@ -1,0 +1,40 @@
+body {
+  font-family: 'NanumBarunGothic', 'serif';
+  margin: 0 auto;
+}
+
+h1 {
+  margin: 10px auto;
+}
+
+.list {
+  text-align: center;
+  font-size: 50px;
+  border-bottom: 1px solid #00c73c;
+}
+
+.main_list form {
+  display: inline;
+}
+.topic_list {
+  text-align: center;
+  padding: 15px;
+  border-bottom: 1px solid #00c73c;
+}
+.topic_list .item_topic {
+  display: inline-block;
+}
+nav {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #00c73c;
+  height: 900px;                                 /* 화면 크기에 맞추지 못했음 */                                 
+}
+
+.item_All {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+}
+article {
+  margin-left: 20px;
+}

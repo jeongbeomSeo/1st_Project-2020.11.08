@@ -1,0 +1,59 @@
+.MainPage {
+  display: block;
+  margin: 0 auto;
+  font-size: 80px;
+  background-color: #00c73c;
+  color: white;
+  text-align:center;
+  padding: 40px;
+}
+.MainMenu li {
+  padding: 5px 0 5px 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #efefef;
+  font-size: 20px;
+}
+.jeongbeom {
+  font-size: 30px;
+  font-weight: bold;
+  background-color:  #00c73c;
+  margin: 0 auto;
+  display: block;
+  padding: 30px;
+  color:white;
+  position: fixed; bottom: 0; width: 100%;
+  text-align: center;
+}
+a {
+  text-decoration: none;;
+  font-weight: bold;
+}
+.login {
+  display: block;
+  margin: 0 auto;
+  font-size: 80px;
+  color: #00c73c;
+  text-align:center;
+  padding: 40px;
+  border-bottom: 1px solid #00c73c;
+}
+.login_input {
+  position: relative;
+  text-align: center;
+  margin-top: 50px;
+}
+.item_id {
+  margin-bottom: 5px;
+}
+.item_password {
+  margin: 5px 0 5px;
+}
+.input_login {
+  width: 70px;
+}
+.item_login_button {
+  display:inline;
+}
+.item_link_singup {
+  display:inline;
+}
